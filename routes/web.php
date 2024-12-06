@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\MasterController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
@@ -27,12 +28,18 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
 
+// Group routes that require authentication
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/surat/list', [FormController::class, 'list'])->name('form.list');
     
+    // Surat Routes
+    Route::get('/surat/list', [FormController::class, 'list'])->name('form.list');
+    Route::get('/surat/add', [FormController::class, 'add'])->name('form.add');
+
+    // Data Routes
+    Route::get('/master/data', [MasterController::class, 'data'])->name('master.data');
 });
 
 require __DIR__.'/auth.php';
