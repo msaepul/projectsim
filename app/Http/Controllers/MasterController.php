@@ -20,7 +20,7 @@ class MasterController extends Controller
     {
         // Ambil semua data cabang
         $cabangs = Cabang::all();
-    
+
         // Kirimkan ke view
         return view('master.cabang', compact('cabangs'));
     }
@@ -55,22 +55,27 @@ class MasterController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validasi input
         $request->validate([
-            'nama_cabang' => 'required',
-            'jenis_cabang' => 'required',
-            'kode_cabang' => 'required',
+            'nama_cabang' => 'required|string|max:255',
+            'alamat_cabang' => 'required|string',
+            'kode_cabang' => 'required|string|max:10',
         ]);
 
-        // Mencari data berdasarkan ID
-        $data = cabang::findOrFail($id);
+        // $cabang = Cabang::findOrFail($id);
+        // $cabang->nama_cabang = $request->nama_cabang;
+        // $cabang->alamat_cabang = $request->alamat_cabang;
+        // $cabang->kode_cabang = $request->kode_cabang;
+        // dd();
 
-        dd($data);  
-        // Memperbarui data yang ada dengan data baru
-        $data->update($request->all());
+
+        // $cabang->save();
+
+        $cabang = Cabang::findOrFail($id);
+        $cabang->fill($request->all());
+        $cabang->save();
 
 
-        return redirect()->route('master.cabang')->with('success', 'Data berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Data cabang berhasil diubah.');
     }
 
 
