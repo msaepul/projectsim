@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('surats', function (Blueprint $table) {
+        Schema::create('cabangs', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_surat');
-            $table->string('kode')->unique();
-            $table->string('nama_surat');
-            $table->date('berlaku')->nullable();
-            $table->string('cabang_id');
+            $table->string('nama_cabang');
+            $table->string('kode_cabang')->unique();
+            $table->string('alamat_cabang');
             $table->timestamps();
         });
     }
@@ -24,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('surats');
+        Schema::dropIfExists('cabangs');
     }
 };
+
