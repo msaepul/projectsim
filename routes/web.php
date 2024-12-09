@@ -48,6 +48,15 @@ Route::middleware('auth')->group(function () {
 
     // Data Routes
     Route::get('/master/data', [MasterController::class, 'data'])->name('master.data');
+    Route::get('/master/cabang', [MasterController::class, 'cabang'])->name('master.cabang');
+    Route::get('/cabang/add_cabang', [MasterController::class, 'add'])->name('cabang.add_cabang');
+    Route::post('/cabang/add/action', [MasterController::class, 'store'])->name('cabang.store');
+
+    Route::delete('/cabang/delete/{id}', [MasterController::class, 'destroy'])->name('cabang.destroy');
+    Route::post('/cabang/store', [MasterController::class, 'store'])->name('cabang.store');
+
+    Route::get('/cabang/edit/{id}', [MasterController::class, 'edit'])->name('cabang.edit');
+    Route::put('/cabang/update/{id}', [MasterController::class, 'update'])->name('cabang.update');
 });
 
 require __DIR__ . '/auth.php';
