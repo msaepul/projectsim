@@ -14,4 +14,6 @@ class MasterController extends Controller
     {
         return view('master.data');
     }
+
 }
+

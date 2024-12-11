@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\MasterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\jenisuratController;
 
 /*
 |---------------------------------------------------------------------------
@@ -48,6 +49,11 @@ Route::middleware('auth')->group(function () {
 
     // Data Routes
     Route::get('/master/data', [MasterController::class, 'data'])->name('master.data');
+    Route::get('/master/jenissurat', [jenisuratController::class, 'index'])->name('master.jenissurat');
+    Route::post('/master/jenissurat', [jenisuratController::class, 'store'])->name('master.jenissurat.store');
+    Route::get('/master/jenissurat/edit/{id}', [FormController::class, 'edit'])->name('master.jenissurat.edit');
+    Route::delete('/master/jenissurat/edit/{id}', [FormController::class, 'destroy'])->name('master.jenissurat.destroy');
+    Route::post('/master/jenissurat/update/{id}', [FormController::class, 'update'])->name('master.jenissurat.update');
 });
 
 require __DIR__ . '/auth.php';
