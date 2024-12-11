@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\MasterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\jenisuratController;
 
 /*
 |---------------------------------------------------------------------------
@@ -43,11 +44,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/surat/delete/{id}', [FormController::class, 'destroy'])->name('form.destroy');
 
 
-
-
-
     // Data Routes
     Route::get('/master/data', [MasterController::class, 'data'])->name('master.data');
+
+    Route::get('/master/jenissurat', [jenisuratController::class, 'index'])->name('master.jenissurat');
+    Route::post('/master/jenissurat', [jenisuratController::class, 'store'])->name('master.jenissurat.store');
+    Route::get('/master/jenissurat/edit/{id}', [FormController::class, 'edit'])->name('master.jenissurat.edit');
+    Route::delete('/master/jenissurat/edit/{id}', [FormController::class, 'destroy'])->name('master.jenissurat.destroy');
+    Route::post('/master/jenissurat/update/{id}', [FormController::class, 'update'])->name('master.jenissurat.update');
+
     Route::get('/master/cabang', [MasterController::class, 'cabang'])->name('master.cabang');
     Route::get('/cabang/add_cabang', [MasterController::class, 'add'])->name('cabang.add_cabang');
     Route::post('/cabang/add/action', [MasterController::class, 'store'])->name('cabang.store');
@@ -57,6 +62,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cabang/edit/{id}', [MasterController::class, 'edit'])->name('cabang.edit');
     Route::put('/cabang/update/{id}', [MasterController::class, 'update'])->name('cabang.update');
+
 });
 
 require __DIR__ . '/auth.php';

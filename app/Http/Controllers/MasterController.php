@@ -16,6 +16,7 @@ class MasterController extends Controller
     {
         return view('master.data');
     }
+
     public function cabang()
     {
         // Ambil semua data cabang
@@ -90,4 +91,6 @@ class MasterController extends Controller
         // Mengarahkan kembali ke halaman daftar dengan pesan sukses
         return redirect()->route('master.cabang')->with('success', 'Data berhasil dihapus!');
     }
+
 }
+
