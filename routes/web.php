@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/master/jenissurat', [jenisuratController::class, 'store'])->name('master.jenissurat.store');
     Route::get('/master/jenissurat/edit/{id}', [FormController::class, 'edit'])->name('master.jenissurat.edit');
     Route::delete('/master/jenissurat/edit/{id}', [FormController::class, 'destroy'])->name('master.jenissurat.destroy');
-    Route::post('/master/jenissurat/update/{id}', [FormController::class, 'update'])->name('master.jenissurat.update');
+    Route::put('/master/jenissurat/update/{id}', [FormController::class, 'update'])->name('master.jenissurat.update');
 
     Route::get('/master/cabang', [MasterController::class, 'cabang'])->name('master.cabang');
     Route::get('/cabang/add_cabang', [MasterController::class, 'add'])->name('cabang.add_cabang');
