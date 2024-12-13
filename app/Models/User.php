@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'pekerjaan',
+        'tentang_diri',
+        'no_telepon',
+        'pengalaman',
+        'foto',
     ];
 
     /**
@@ -42,4 +47,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function biodatas()
+{
+    return $this->hasMany(Biodata::class);
+}
+
 }

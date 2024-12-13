@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\Data_diriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/logout', [ProfileController::class, 'logout'])->name('auth.logout');
 
     // Surat Routes
     Route::get('/surat/list', [FormController::class, 'list'])->name('form.list');
@@ -42,21 +44,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/surat/update/{id}', [FormController::class, 'update'])->name('form.update');
     Route::delete('/surat/delete/{id}', [FormController::class, 'destroy'])->name('form.destroy');
 
-
-
-
-
     // Data Routes
     Route::get('/master/data', [MasterController::class, 'data'])->name('master.data');
     Route::get('/master/cabang', [MasterController::class, 'cabang'])->name('master.cabang');
-    Route::get('/cabang/add_cabang', [MasterController::class, 'add'])->name('cabang.add_cabang');
-    Route::post('/cabang/add/action', [MasterController::class, 'store'])->name('cabang.store');
-
     Route::delete('/cabang/delete/{id}', [MasterController::class, 'destroy'])->name('cabang.destroy');
     Route::post('/cabang/store', [MasterController::class, 'store'])->name('cabang.store');
-
     Route::get('/cabang/edit/{id}', [MasterController::class, 'edit'])->name('cabang.edit');
     Route::put('/cabang/update/{id}', [MasterController::class, 'update'])->name('cabang.update');
+
+    // Data_diri Routes
+    Route::get('/data_diri/biodata', [Data_diriController::class, 'biodata'])->name('data_diri.biodata');
+    Route::post('/biodata/store', [Data_diriController::class, 'store'])->name('biodata.store');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,7 +1,8 @@
 @extends('layouts.main')
 @section('content')
     <div class="card-header">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Tambah Data</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+            <img src="{{ asset('icons/duplicate-outline.svg') }}" alt="Tambah" style="width: 20px; height: 20px; margin-right: 4px" >Tambah Data</button>
     </div>
 
     <!-- Main content -->
@@ -25,9 +26,10 @@
                             <td>{{ $data->alamat_cabang }}</td>
                             <td>{{ $data->kode_cabang }}</td>
                             <td>
-                                <div class="d-flex gap-2">
+                                <div class="d-flex gap-2" style="display: flex; gap: 10px;">
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#editModal-{{ $data->id }}">Edit</button>
+                                        data-target="#editModal-{{ $data->id }}"><img src="{{ asset('icons/create-outline.svg') }}" alt="Tambah" style="width: 20px; height: 20px; margin-right: 4px" >
+                                        Edit</button>
 
                                     {{-- modal edit --}}
                                     <div class="modal fade" id="editModal-{{ $data->id }}" tabindex="-1" role="dialog"
@@ -79,7 +81,9 @@
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <img src="{{ asset('icons/trash-outline.svg') }}" alt="Tambah" style="width: 20px; height: 20px; margin-right: 4px" >
+                                            Hapus</button>
                                     </form>
                                 </div>
                             </td>

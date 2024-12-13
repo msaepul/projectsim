@@ -11,6 +11,14 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public function showProfile()
+    {
+    $name = User::find(1);
+    $foto = $name->foto; // Asumsikan 'foto' adalah atribut dari model User
+
+    return view('profile', compact('user', 'foto'));
+    }
     /**
      * Display the user's profile form.
      */
@@ -57,4 +65,16 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+
 }
