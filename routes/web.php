@@ -5,6 +5,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\Data_diriController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\jenisuratController;
 
 /*
 |---------------------------------------------------------------------------
@@ -44,17 +45,27 @@ Route::middleware('auth')->group(function () {
     Route::put('/surat/update/{id}', [FormController::class, 'update'])->name('form.update');
     Route::delete('/surat/delete/{id}', [FormController::class, 'destroy'])->name('form.destroy');
 
+
     // Data Routes
     Route::get('/master/data', [MasterController::class, 'data'])->name('master.data');
+
+    Route::get('/master/jenissurat', [jenisuratController::class, 'index'])->name('master.jenissurat');
+    Route::post('/master/jenissurat', [jenisuratController::class, 'store'])->name('master.jenissurat.store');
+    Route::get('/master/jenissurat/edit/{id}', [jenisuratController::class, 'edit'])->name('master.jenissurat.edit');
+    Route::delete('/master/jenissurat/delete/{id}', [jenisuratController::class, 'destroy'])->name('master.jenissurat.destroy');
+    Route::put('/master/jenissurat/update/{id}', [jenisuratController::class, 'update'])->name('master.jenissurat.update');
+
     Route::get('/master/cabang', [MasterController::class, 'cabang'])->name('master.cabang');
     Route::delete('/cabang/delete/{id}', [MasterController::class, 'destroy'])->name('cabang.destroy');
     Route::post('/cabang/store', [MasterController::class, 'store'])->name('cabang.store');
     Route::get('/cabang/edit/{id}', [MasterController::class, 'edit'])->name('cabang.edit');
     Route::put('/cabang/update/{id}', [MasterController::class, 'update'])->name('cabang.update');
 
+
     // Data_diri Routes
     Route::get('/data_diri/biodata', [Data_diriController::class, 'biodata'])->name('data_diri.biodata');
     Route::post('/biodata/store', [Data_diriController::class, 'store'])->name('biodata.store');
+
 });
 
 require __DIR__ . '/auth.php';
