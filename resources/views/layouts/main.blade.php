@@ -27,7 +27,18 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
-    <!-- iCheck -->
+     <!-- Link ke CSS -->
+     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+     
+     {{-- tes --}}
+     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+     
+
+     {{-- tes1 --}}
+     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
     <!-- JQVMap -->
@@ -70,7 +81,7 @@
                     <a href="index3.html" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="{{ route('data_diri.biodata') }}" class="nav-link">Contact</a>
                 </li>
             </ul>
 
@@ -96,19 +107,18 @@
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fa fa-caret-down"></i>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="{{ route('data_diri.biodata') }}" class="dropdown-item">Show Profile</a>
+                        <a href="{{ url('logout') }}" class="dropdown-item">Logout</a>
+                    </div>
                 </li>
             </ul>
         </nav>
+        
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -129,7 +139,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{ $name }}</a>
+                        <a href="{{ route('data_diri.biodata') }}" class="d-block">{{ $name }}</a>
                     </div>
                 </div>
 
@@ -161,7 +171,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Surat Izin
@@ -462,29 +472,186 @@
     <!-- overlayScrollbars -->
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.js') }}"></script>
-<script>
-   $(function () {
-        $('#example1').DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": [
-                {
-                    extend: 'print',
-                    text: 'Print',
-                    exportOptions: {
-                    columns: ':not(:last-child)' 
-                    }
-                },
-                "copy", "csv", "excel", "pdf"
-            ],
-            columnDefs: [
-                { targets: -1, orderable: false } 
-            ]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
+    <script>
+        $(function() {
+            $('#example1').DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": [{
+                        extend: 'print',
+                        text: 'Print',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    "copy", "csv", "excel", "pdf"
+                ],
+                columnDefs: [{
+                    targets: -1,
+                    orderable: false
+                }]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+
+        // sweet button
+        $(function() {
+                    var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    $('.swalDefaultSuccess').click(function() {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.swalDefaultInfo').click(function() {
+                        Toast.fire({
+                            icon: 'info',
+                            title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.swalDefaultError').click(function() {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.swalDefaultWarning').click(function() {
+                        Toast.fire({
+                            icon: 'warning',
+                            title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.swalDefaultQuestion').click(function() {
+                        Toast.fire({
+                            icon: 'question',
+                            title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+
+                    $('.toastrDefaultSuccess').click(function() {
+                        toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+                    });
+                    $('.toastrDefaultInfo').click(function() {
+                        toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+                    });
+                    $('.toastrDefaultError').click(function() {
+                        toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+                    });
+                    $('.toastrDefaultWarning').click(function() {
+                        toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+                    });
+
+                    $('.toastsDefaultDefault').click(function() {
+                        $(document).Toasts('create', {
+                            title: 'Toast Title',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultTopLeft').click(function() {
+                        $(document).Toasts('create', {
+                            title: 'Toast Title',
+                            position: 'topLeft',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultBottomRight').click(function() {
+                        $(document).Toasts('create', {
+                            title: 'Toast Title',
+                            position: 'bottomRight',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultBottomLeft').click(function() {
+                        $(document).Toasts('create', {
+                            title: 'Toast Title',
+                            position: 'bottomLeft',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultAutohide').click(function() {
+                        $(document).Toasts('create', {
+                            title: 'Toast Title',
+                            autohide: true,
+                            delay: 750,
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultNotFixed').click(function() {
+                        $(document).Toasts('create', {
+                            title: 'Toast Title',
+                            fixed: false,
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultFull').click(function() {
+                        $(document).Toasts('create', {
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+                            title: 'Toast Title',
+                            subtitle: 'Subtitle',
+                            icon: 'fas fa-envelope fa-lg',
+                        })
+                    });
+                    $('.toastsDefaultFullImage').click(function() {
+                        $(document).Toasts('create', {
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+                            title: 'Toast Title',
+                            subtitle: 'Subtitle',
+                            image: '../../dist/img/user3-128x128.jpg',
+                            imageAlt: 'User Picture',
+                        })
+                    });
+                    $('.toastsDefaultSuccess').click(function() {
+                        $(document).Toasts('create', {
+                            class: 'bg-success',
+                            title: 'Toast Title',
+                            subtitle: 'Subtitle',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultInfo').click(function() {
+                        $(document).Toasts('create', {
+                            class: 'bg-info',
+                            title: 'Toast Title',
+                            subtitle: 'Subtitle',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultWarning').click(function() {
+                        $(document).Toasts('create', {
+                            class: 'bg-warning',
+                            title: 'Toast Title',
+                            subtitle: 'Subtitle',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultDanger').click(function() {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger',
+                            title: 'Toast Title',
+                            subtitle: 'Subtitle',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
+                    $('.toastsDefaultMaroon').click(function() {
+                        $(document).Toasts('create', {
+                            class: 'bg-maroon',
+                            title: 'Toast Title',
+                            subtitle: 'Subtitle',
+                            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                        })
+                    });
     </script>
 </body>
 
