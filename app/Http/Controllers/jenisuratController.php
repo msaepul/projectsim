@@ -29,28 +29,33 @@ class jenisuratController extends Controller
         JenisSurat::create($validated);
 
         // Redirect kembali ke halaman dengan pesan sukses
-        return redirect()->route('master.jenissurat')->with('success', 'Data jenis surat berhasil ditambahkan!');
+        return redirect()->route('master.jenissurat')->with('success', 'Surat baru berhasil ditambahkan!');
     }
 
     public function edit(JenisSurat $JenisSurat)
-    {
-        return view('master.jenissurat', compact('JenisSurat')); // Mengarahkan ke halaman yang sama untuk edit
+       {
+        // Mencari data berdasarkan ID yang diberikan
+        $JenisSurat = JenisSurat    ::findOrFail($id);
+
+        // Mengirimkan data ke view
+        return view('master.jenissurat', compact('JenisSurat'));
     }
 
-    public function update(Request $request, JenisSurat $jenisSurat)
+    public function update(Request $request, $id)
     {
-        // Validasi input dari form
-        $validated = $request->validate([
+        $request->validate([
             'nama_surat' => 'required|string|max:255',
             'jenis_surat' => 'required|in:pelatihan,tugas,keputusan',
             'kode_surat' => 'nullable|string|max:100',
             'keterangan' => 'nullable|string',
         ]);
 
-        // Update data ke database
-        $JenisSurat->update($validated);
+        $JenisSurat = JenisSurat::findOrFail($id);
+        $JenisSurat->fill($request->all());
+        $JenisSurat->save();
 
-        return redirect()->route('master.jenissurat')->with('success', 'Data jenis surat berhasil diperbarui!');
+
+        return redirect()->back()->with('success', 'Surat berhasil diubah ✅');
     }
 
     public function destroy($id)
