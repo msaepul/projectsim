@@ -5,18 +5,22 @@
 @endsection
 
 @section('content')
+    <div class="alert alert-info" role="alert">
+        <strong>Info:</strong> Pastikan semua data surat terisi dengan lengkap dan benar.
+    </div>
+
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Data Jenis Surat</h3>
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahSuratModal">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#tambahSuratModal">
                     <i class="fas fa-plus"></i> Buat Surat Baru
                 </button>
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-striped">
-                <thead>
+            <table class="table table-bordered table-striped" style="background-color: #f0f8ff; color: #000;">
+                <thead style="background-color: #d6eaff;">
                     <tr>
                         <th>Nama Surat</th>
                         <th>Jenis Surat</th>
@@ -33,11 +37,11 @@
                             <td>{{ $surat->kode_surat }}</td>
                             <td>{{ $surat->keterangan }}</td>
                             <td>
-                                <div class="d-flex gap-2">
+                                <div class="d-flex" style="gap: 8px;">
                                     <!-- Button untuk Edit Modal -->
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                    <button type="button" class="btn btn-sm btn-primary me-3" data-toggle="modal"
                                         data-target="#editModal-{{ $surat->id }}">
-                                        Edit
+                                        <i class="fas fa-edit"></i> Edit
                                     </button>
 
                                     <!-- Modal Edit -->
@@ -95,8 +99,9 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Tutup</button>
-                                                        <button type="submit" class="btn btn-primary">Simpan
-                                                            Perubahan</button>
+                                                        <button type="submit" class="btn btn-primary">
+                                                            <i class="fas fa-save"></i> Simpan Perubahan
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -108,11 +113,12 @@
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus surat ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i> Hapus
+                                        </button>
                                     </form>
                                 </div>
-
-
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -165,26 +171,10 @@
             </div>
         </div>
     </div>
+    <style>
+        table tbody tr:hover {
+            background-color: #e3f2fd;
+            cursor: pointer;
+        }
+    </style>
 @endsection
-
-{{-- @section('scripts')
-    <script>
-        $('#editSuratModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var id = button.data('id')
-            var nama_surat = button.data('nama_surat')
-            var jenis_surat = button.data('jenis_surat')
-            var kode_surat = button.data('kode_surat')
-            var keterangan = button.data('keterangan')
-
-            var modal = $(this)
-            modal.find('#edit_nama_surat').val(nama_surat)
-            modal.find('#edit_jenis_surat').val(jenis_surat)
-            modal.find('#edit_kode_surat').val(kode_surat)
-            modal.find('#edit_keterangan').val(keterangan)
-
-            var action = '/master/jenissurat/' + id
-            modal.find('#editSuratForm').attr('action', action)
-        })
-    </script> --}}
-{{-- @endsection --}}
